@@ -1,26 +1,36 @@
-<h2>Log in</h2>
+<div class="flex flex-col">
 
-<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-  <div class="field text-sky-400">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+  <div class="mx-auto w-52 h-auto">
+    <%= image_tag "/assets/gainloglogo.svg" %>
   </div>
 
-  <div class="field">
-    <%= f.label :password %><br />
-    <%= f.password_field :password, autocomplete: "current-password" %>
-  </div>
+  <h2 class="mx-auto mt-16 mb-3">Log in</h2>
 
-  <% if devise_mapping.rememberable? %>
+  <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
     <div class="field">
-      <%= f.check_box :remember_me %>
-      <%= f.label :remember_me %>
+      <%= f.label :email %><br />
+      <div class="text-black"><%= f.email_field :email, autofocus: true, autocomplete: "email" %></div>
+    </div>
+
+    <div class="field mt-5">
+      <%= f.label :password %><br />
+      <%= f.password_field :password, autocomplete: "current-password" %>
+    </div>
+
+    <% if devise_mapping.rememberable? %>
+      <div class="field mt-1">
+        <%= f.check_box :remember_me %>
+        <%= f.label :remember_me %>
+      </div>
+    <% end %>
+
+    <div class="actions mt-3 inline-block rounded border border-sky-800 px-12 py-3 text-sm font-medium text-sky-800 hover:bg-sky-800 hover:text-slate-200 focus:outline-none focus:ring active:bg-indigo-500 hover:shadow-lg">
+      <%= f.submit "Log in" %>
     </div>
   <% end %>
 
-  <div class="actions">
-    <%= f.submit "Log in" %>
-  </div>
-<% end %>
+  <p class="notice mt-5 text-red-500"><%= notice %></p>
+  <p class="alert mb-10 text-red-500"><%= alert %></p>
 
-<%= render "devise/shared/links" %>
+  <%= render "devise/shared/links" %>
+</div>

@@ -11,11 +11,13 @@
     <%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %>
   </head>
 
-  <body>
-    <main class="container mx-auto mt-28 px-5 flex">
+  <body class="bg-slate-900 w-screen text-slate-200 uppercase">
+    <main class="container w-max mx-auto mt-28 px-5 flex">
       <%= yield %>
-      <p class="notice"><%= notice %></p>
-      <p class="alert"><%= alert %></p>
+
+      <!-- These have been commented out, if need them manually add to your views -->
+      <!-- <p class="notice"><%= notice %></p>
+      <p class="alert"><%= alert %></p> -->
     </main>
   </body>
 </html>
