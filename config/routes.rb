@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   # root "articles#index"
   root "workouts#index"
 
-  get "/workouts", to: "workouts#index"
+  resources :workouts
+  resources :exercises
 
 end

@@ -9,15 +9,18 @@
 
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %>
+    <script src="https://kit.fontawesome.com/f7174767c6.js" crossorigin="anonymous"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.1.0/flowbite.min.css" rel="stylesheet" />
   </head>
 
-  <body class="bg-slate-900 w-screen text-slate-200 uppercase">
-    <main class="container w-max mx-auto mt-28 px-5 flex">
+  <body class="bg-slate-900 w-screen text-slate-200">
+    <main class="container w-full">
       <%= yield %>
 
       <!-- These have been commented out, if need them manually add to your views -->
       <!-- <p class="notice"><%= notice %></p>
       <p class="alert"><%= alert %></p> -->
     </main>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.1.0/flowbite.min.js"></script>
   </body>
 </html>

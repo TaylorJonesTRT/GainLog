@@ -1,16 +1,16 @@
-<div class="flex flex-col">
+<div class="uppercase mx-auto flex flex-col w-11/12 justify-center items-center">
 
-  <div class="mx-auto w-52 h-auto">
+  <div class="mx-auto w-max h-auto">
     <%= image_tag "/assets/gainloglogo.svg" %>
   </div>
 
-<h2 class="mx-auto mt-16 mb-3">Sign up</h2>
+<h2 class="mx-auto mt-5 mb-10">Sign up</h2>
 
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+<%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { class: "flex flex-col"}) do |f| %>
 
   <div class="field">
     <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+    <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "w-full"%>
   </div>
 
   <div class="field mt-5">
@@ -18,21 +18,23 @@
     <% if @minimum_password_length %>
     <em>(<%= @minimum_password_length %> characters minimum)</em>
     <% end %><br />
-    <%= f.password_field :password, autocomplete: "new-password" %>
+    <%= f.password_field :password, autocomplete: "new-password", class: "w-full"%>
   </div>
 
   <div class="field mt-5">
     <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
+    <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "w-full" %>
   </div>
 
-  <div class="actions mt-3 inline-block rounded border border-sky-800 px-12 py-3 text-sm font-medium text-sky-800 hover:bg-sky-800 hover:text-slate-200 focus:outline-none focus:ring active:bg-indigo-500 hover:shadow-lg">
+  <div class="actions self-center w-6/12 mt-3 inline-block rounded border border-sky-800 px-12 py-3 text-sm font-medium text-sky-800 hover:bg-sky-800 hover:text-slate-200 focus:outline-none focus:ring active:bg-indigo-500 hover:shadow-lg">
     <%= f.submit "Sign up" %>
   </div>
 <% end %>
 
-  <p class="notice mt-5 text-red-500"><%= notice %></p>
-  <p class="alert mb-10 text-red-500"><%= alert %></p>
+  <p class="notice text-red-500"><%= notice %></p>
+  <p class="alert text-red-500"><%= alert %></p>
 
-<%= render "devise/shared/links" %>
+  <div class="mt-5">
+    <%= render "devise/shared/links"%>
+  </div>
 </div>

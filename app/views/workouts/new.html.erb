@@ -1,0 +1,19 @@
+<div class="w-11/12 mt-10 mx-auto flex flex-col">
+  <h1 class="text-3xl font-bold">Create a Workout</h1>
+  <div class="workout_start mt-7 flex flex-col">
+    <h3 class="text-lg">Start by selecting exercises to add</h3>
+    <p class="text-xs">
+      (You can add/remove exercises after as well)
+    </p>
+    <div class="mt-5">
+      <% if @user.exercises.empty? %>
+        <p>It looks like you don't have any exercises created, click <%= link_to "here", new_exercise_path, class: "text-red-300 hover:underline" %> to create some!</p>
+        <% else %>
+        <%= select_tag(:id, options_from_collection_for_select(current_user.exercises, :id, :name)) %>
+          <%# @user.exercises.each do |exercise| %>
+<!--          <li><%#= exercise.name %></li>-->
+        <%# end %>
+        <% end %>
+    </div>
+  </div>
+</div>

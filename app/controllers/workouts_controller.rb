@@ -5,6 +5,7 @@ class WorkoutsController < ApplicationController
 
   def new
     @workout = Workout.new
+    @user = current_user
   end
 
   def create

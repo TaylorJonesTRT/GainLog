@@ -1,5 +1,22 @@
-<div>
-  <h1 class="font-bold text-4xl">Workouts#index</h1>
-  <p class="text-red-400">Find me in app/views/workouts/index.html.erb</p>
+<!--<div class="w-full mx-auto grid gap-4 justify-center mt-12">-->
+  <%#= month_calendar do |date| %>
+<!--    <div class="flex flex-rows-4 p-4">-->
+      <%#= date.day %>
+<!--    </div>-->
+  <%# end %>
   <%= link_to "Sign out", destroy_user_session_path, data: { turbo_method: :delete } %>
+
+<!--</div>-->
+<div class="w-11/12 mt-10 mx-auto flex flex-col">
+  <h1 class="text-3xl font-bold">Start Workout</h1>
+  <div class="quickstart mt-7 flex flex-col">
+    <h3>Quickstart</h3>
+    <p>
+      Hello,
+      <%= current_user.email %>
+    </p>
+    <div class="w-full mx-auto text-center self-center mt-3 mb-3 rounded border bg-sky-800 border-sky-700 py-1 text-sm font-medium text-sky-white hover:bg-sky-700 hover:border-sky-800 hover:text-slate-200 focus:outline-none focus:ring active:bg-indigo-500 hover:shadow-lg">
+      <%= link_to "Start an Empty Workout", new_workout_path %>
+    </div>
+  </div>
 </div>
