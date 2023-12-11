@@ -23,14 +23,14 @@ class ExercisesController < ApplicationController
 
   private
 
-    def exercise_params
-      params.require(:exercise).permit(:name, :user_id)
-    end
+  def exercise_params
+    params.require(:exercise).permit(:name, :user_id)
+  end
 
-    def update_exercise_list
-      render turbo_stream:
-               turbo_stream.replace("exercise_list",
-                                    partial: "exercises/exercise_list",
-                                    locals: { exercises: current_user.exercises })
-    end
+  def update_exercise_list
+    render turbo_stream:
+             turbo_stream.replace('exercise_list',
+                                  partial: 'exercises/exercise_list',
+                                  locals: { exercises: current_user.exercises })
+  end
 end

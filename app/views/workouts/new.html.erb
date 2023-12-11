@@ -1,18 +1,29 @@
 <div class="w-11/12 mt-10 mx-auto flex flex-col">
   <h1 class="text-3xl font-bold">Create a Workout</h1>
   <div class="workout_start mt-7 flex flex-col">
-    <h3 class="text-lg">Start by selecting exercises to add</h3>
+    <h3 class="text-lg">Start by selecting exercise(s())</h3>
     <p class="text-xs">
-      (You can add/remove exercises after as well)
+      (Don't worry you can add/remove exercises after as well)
     </p>
     <div class="mt-5">
-      <% if @user.exercises.empty? %>
+      <% if current_user.exercises.empty? %>
         <p>It looks like you don't have any exercises created, click <%= link_to "here", new_exercise_path, class: "text-red-300 hover:underline" %> to create some!</p>
         <% else %>
-        <%= select_tag(:id, options_from_collection_for_select(current_user.exercises, :id, :name)) %>
-          <%# @user.exercises.each do |exercise| %>
-<!--          <li><%#= exercise.name %></li>-->
-        <%# end %>
+      <%= form_with model: @workout do |form| %>
+        <%= form.hidden_field :workout %>
+          <div class="mt-5 md:p-5 border-t border-gray-200 rounded-b dark:border-gray-600">
+            <%= select_tag "selected_exercises[]", options_from_collection_for_select(current_user.exercises, :id, :name), multiple: true, class: "mt-5 mb-5 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" %>
+          </div>
+
+          <div class="flex items-center p-4 md:p-5 border-t border-gray-200 rounded-b dark:border-gray-600">
+            <%= form.submit class: 'text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800' %>
+          </div>
+
+          <% @workout.errors.full_messages_for(:selected_exercises).each do |message| %>
+            <div><%= message %></div>
+          <% end %>
+
+        <% end %>
         <% end %>
     </div>
   </div>

@@ -1,0 +1,18 @@
+<div class="nested-form-wrapper">
+  <%= form.label :reps %>
+  <div class="text-black">
+    <%= form.text_field :reps %>
+  </div>
+
+  <%= form.label :weight %>
+  <div class="text-black">
+    <%= form.text_field :weight %>
+  </div>
+
+  <%= form.hidden_field :exercise_id, :value => exercise.id %>
+  <%= form.hidden_field :training_id, :value => training.id %>
+
+  <button type="button" data-action="nested-form#remove">Remove set</button>
+
+  <%= form.hidden_field :_destroy %>
+</div>

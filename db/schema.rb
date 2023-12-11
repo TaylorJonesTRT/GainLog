@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_11_01_030630) do
+ActiveRecord::Schema[7.0].define(version: 2023_11_15_222446) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_graphql"
   enable_extension "pg_stat_statements"
@@ -39,12 +39,25 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_01_030630) do
     t.index ["user_id"], name: "index_exercises_on_user_id"
   end
 
-  create_table "trainings", force: :cascade do |t|
+  create_table "rep_sets", force: :cascade do |t|
+    t.integer "reps"
+    t.float "weight"
+    t.bigint "exercise_id", null: false
     t.bigint "workout_id", null: false
-    t.integer "exercise_id"
-    t.json "set_data"
+    t.bigint "training_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["exercise_id"], name: "index_rep_sets_on_exercise_id"
+    t.index ["training_id"], name: "index_rep_sets_on_training_id"
+    t.index ["workout_id"], name: "index_rep_sets_on_workout_id"
+  end
+
+  create_table "trainings", force: :cascade do |t|
+    t.bigint "workout_id", null: false
+    t.bigint "exercise_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["exercise_id"], name: "index_trainings_on_exercise_id"
     t.index ["workout_id"], name: "index_trainings_on_workout_id"
   end
 
@@ -65,11 +78,14 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_01_030630) do
     t.date "workout_date"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "workout_name"
     t.index ["user_id"], name: "index_workouts_on_user_id"
   end
 
   add_foreign_key "exercises", "users"
+  add_foreign_key "rep_sets", "exercises"
+  add_foreign_key "rep_sets", "trainings"
+  add_foreign_key "rep_sets", "workouts"
+  add_foreign_key "trainings", "exercises"
   add_foreign_key "trainings", "workouts"
   add_foreign_key "workouts", "users"
 end

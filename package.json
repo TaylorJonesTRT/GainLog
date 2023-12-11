@@ -4,10 +4,25 @@
   "dependencies": {
     "@hotwired/stimulus": "^3.2.2",
     "@hotwired/turbo-rails": "^7.3.0",
+    "@inertiajs/inertia": "^0.11.1",
+    "@inertiajs/progress": "^0.2.7",
+    "@inertiajs/svelte": "^1.0.14",
+    "@sveltejs/vite-plugin-svelte": "^3.0.1",
     "esbuild": "^0.19.5",
-    "flowbite": "^2.1.1"
+    "flowbite": "^2.1.1",
+    "stimulus-rails-nested-form": "^4.1.0",
+    "svelte": "^4.2.8"
   },
   "scripts": {
     "build": "esbuild app/javascript/*.* --bundle --sourcemap --outdir=app/assets/builds --public-path=/assets"
+  },
+  "type": "module",
+  "devDependencies": {
+    "@tailwindcss/aspect-ratio": "^0.4.2",
+    "@tailwindcss/container-queries": "^0.1.1",
+    "@tailwindcss/forms": "^0.5.7",
+    "@tailwindcss/typography": "^0.5.10",
+    "vite": "^5.0.0",
+    "vite-plugin-ruby": "^5.0.0"
   }
 }
