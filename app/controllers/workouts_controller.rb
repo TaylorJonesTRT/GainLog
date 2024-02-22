@@ -1,61 +1,60 @@
 class WorkoutsController < ApplicationController
-  require 'pp'
   before_action :authenticate_user!
-  before_action :set_workout, only: %i[destroy show edit update]
 
   def index; end
 
-  def show; end
+  def show
+    @workout = current_user.workouts.find_by(id: params[:id])
+    @workout_trainings = @workout.trainings.all
 
-  def new
-    @workout = Workout.new
-  end
+    workout_hash = {
+      'id' => @workout.id,
+      'created_at' => @workout.created_at,
+      'user_id' => @workout.user_id,
+      'trainings' => []
+    }
 
-  def create
-    @workout = current_user.workouts.build(workout_params)
-
-    if @workout.save
-      params[:selected_exercises].each do |exercise|
-        Training.create(workout_id: @workout.id, exercise_id: exercise)
-      end
-      redirect_to @workout
-    else
-      render :new, status: :unprocessable_entity
+    @workout_trainings.each do |training|
+      hash = {
+        'name' => nil,
+        'training_id' => nil,
+        'exercise_id' => nil,
+        'rep_sets' => nil
+      }
+      training_rep_sets = @workout.rep_sets.all.select { |m| m.training_id == training.id }
+      puts training_rep_sets
+      exercise = Exercise.find_by(id: training.exercise_id)
+      hash['rep_sets'] = training_rep_sets
+      hash['training_id'] = training.id
+      hash['name'] = exercise.name
+      hash['exercise_id'] = exercise.id
+      workout_hash['trainings'].push(hash)
     end
   end
 
-  def edit
-    render inertia: 'WorkoutEdit', props: {
-      name: 'Inertia testaroooo'
-    }
-  end
+  def create
+    workout_params[:exercises].each do |exercise|
+    end
+    @workout = current_user.workouts.build(user_id: current_user.id)
 
-  def update
-    @rep_sets = RepSet.new(rep_set_params)
-
-    if @workout.update(workout_params)
-      puts 'hello'
-      puts params[:rep_sets_attributes]
-      puts 'goodbye'
-      redirect_to @workout
+    if @workout.save
+      workout_params[:exercises].each do |exercise|
+        @training = Training.create(workout_id: @workout.id, exercise_id: exercise)
+        if @training.save
+          RepSet.create(workout_id: @workout.id, exercise_id: exercise, training_id: @training.id, reps: nil,
+                        weight: nil)
+        else
+          render json: :unprocessable_entity
+        end
+      end
     else
-      puts 'hello from the else'
-      puts @workout.errors.full_messages
-      render :edit, status: :unprocessable_entity
+      render json: :unprocessable_entity
     end
   end
 
   private
 
-  def set_workout
-    @workout = Workout.find(params[:id])
-  end
-
   def workout_params
-    params.require(:workout).permit(:workout_name, :user_id, :selected_exercise)
-  end
-
-  def rep_set_params
-    params.require(:rep_set).permit(:exercise_id, :workout_id, :reps, :weight, :training_id)
+    params.require(:workout).permit(exercises: [])
   end
 end

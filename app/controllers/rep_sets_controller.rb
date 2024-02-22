@@ -1,25 +1,21 @@
 class RepSetsController < ApplicationController
-  before_action :set_rep_set, only: %i[index destroy show edit update]
+  before_action :authenticate_user!
 
   def index; end
 
-  def new
-    @rep_set = RepSet.new
-    puts "helloooooooooo"
-  end
+  def show; end
 
   def create
-    puts "hello"
-  end
-  end
+    workout_id = repset_params[:workout_id]
+    training_id = repset_params[:training_id]
+    exercise_id = repset_params[:exercise_id]
 
-  def edit; end
-
-  def update; end
+    @rep_set = RepSet.create(workout_id:, training_id:, exercise_id:)
+  end
 
   private
 
-  def set_rep_set
-    @rep_set = RepSet.find(params[:id])
+  def repset_params
+    params.require(:rep_set).permit(:training_id, :workout_id, :exercise_id)
   end
 end

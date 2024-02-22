@@ -1,36 +1,40 @@
 class ExercisesController < ApplicationController
   before_action :authenticate_user!
-  def index
-    @exercises = current_user.exercises
-    @exercise = Exercise.new
-  end
 
-  def new
-    @exercises = current_user.exercises
+  def index
+    @exercises = current_user.exercises.order(name: :asc)
     @exercise = current_user.exercises.build
   end
 
   def create
-    @exercises = current_user.exercises
-    @exercise = current_user.exercises.build(exercise_params)
+    exercise_name = exercise_params[:name]
+
+    @exercise = Exercise.build(name: exercise_name, user_id: current_user.id)
 
     if @exercise.save
       update_exercise_list
     else
-      render :new, status: :unprocessable_entity
+      render exercises_path, status: :unprocessable_entity
     end
+  end
+
+  def destroy
+    puts 'hello'
+    puts params
+    @exercise = Exercise.find(params[:id])
+    puts @exercise
+    puts 'IT TRIED TO DELETE ME'
   end
 
   private
 
   def exercise_params
-    params.require(:exercise).permit(:name, :user_id)
+    params.require(:exercise).permit(:name, :personal_best)
   end
 
   def update_exercise_list
-    render turbo_stream:
-             turbo_stream.replace('exercise_list',
-                                  partial: 'exercises/exercise_list',
-                                  locals: { exercises: current_user.exercises })
+    render turbo_stream: turbo_stream.replace('exercise_list',
+                                              partial: 'exercises/exercise_list',
+                                              locals: { exercises: current_user.exercises.order(name: :asc) })
   end
 end

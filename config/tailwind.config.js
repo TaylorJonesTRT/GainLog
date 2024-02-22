@@ -1,15 +1,17 @@
-/** @type {import('tailwindcss').Config} */
-export default {
+const defaultTheme = require("tailwindcss/defaultTheme");
+
+module.exports = {
   content: [
     "./public/*.html",
     "./app/helpers/**/*.rb",
     "./app/javascript/**/*.js",
     "./app/views/**/*.{erb,haml,html,slim}",
-    "./node_modules/flowbite/**/*.js",
   ],
   theme: {
     extend: {
-      fontFamily: {},
+      fontFamily: {
+        sans: ["Inter var", ...defaultTheme.fontFamily.sans],
+      },
     },
   },
   plugins: [
@@ -17,6 +19,8 @@ export default {
     require("@tailwindcss/aspect-ratio"),
     require("@tailwindcss/typography"),
     require("@tailwindcss/container-queries"),
-    require("flowbite/plugin"),
   ],
+  daisyui: {
+    themes: ["dracula"],
+  },
 };

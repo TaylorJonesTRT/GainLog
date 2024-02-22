@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html data-theme="dracula">
   <head>
     <title>RubyGainLog</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -8,14 +8,8 @@
     <%= stylesheet_link_tag "tailwind", "inter-font", "data-turbo-track": "reload" %>
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_include_tag "application", "data-turbo-track": "reload" %>
-    <%= vite_client_tag %>
-    <%= vite_stylesheet_tag 'application', data: { "turbo-track": "reload" } %>
-    <%= vite_javascript_tag 'application' %>
-
+    <%= stylesheet_link_tag "https://cdn.jsdelivr.net/npm/daisyui@4.7.2/dist/full.min.css" %>
     <script src="https://kit.fontawesome.com/f7174767c6.js" crossorigin="anonymous"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.1.0/flowbite.min.css" rel="stylesheet" />
-    <%= vite_client_tag %>
-    <%= vite_javascript_tag 'application' %>
     <!--
       If using a TypeScript entrypoint file:
       vite_typescript_tag 'application'
@@ -25,17 +19,17 @@
 
       Visit the guide for more information: https://vite-ruby.netlify.app/guide/rails
     -->
+    <%= javascript_importmap_tags %>
 
   </head>
 
-  <body class="bg-slate-900 w-screen text-slate-200">
-    <main class="container w-full mx-auto">
+  <body class="bg-primary: w-screen text-slate-200">
+    <main class="container w-full h-screen mx-auto">
       <%= yield %>
 
       <!-- These have been commented out, if need them manually add to your views -->
       <!-- <p class="notice"><%= notice %></p>
         <p class="alert"><%= alert %></p> -->
     </main>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.1.0/flowbite.min.js"></script>
   </body>
 </html>
