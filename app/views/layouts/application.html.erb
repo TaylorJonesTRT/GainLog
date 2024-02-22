@@ -42,11 +42,11 @@
               <span class="btm-nav-label">Exercises</span>
             </button>
           </a>
-          <a href="/exercises" alt="home" class="bg-base-200">
-            <button class="bg-base-200 text-teal-600">
-              <span class="btm-nav-label">Sign Out</span>
-            </button>
-          </a>
+            <%= link_to destroy_user_session_path, method: :delete, class: "bg-base-200" do %>
+              <button class="bg-base-200 text-teal-600">
+                <span class="btm-nav-label">Sign Out</span>
+              </button>
+            <% end %>
         </div>
     </main>
   </body>

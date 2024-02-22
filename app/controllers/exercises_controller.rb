@@ -19,11 +19,10 @@ class ExercisesController < ApplicationController
   end
 
   def destroy
-    puts 'hello'
-    puts params
     @exercise = Exercise.find(params[:id])
-    puts @exercise
-    puts 'IT TRIED TO DELETE ME'
+    @exercise.destroy
+
+    update_exercise_list
   end
 
   private
