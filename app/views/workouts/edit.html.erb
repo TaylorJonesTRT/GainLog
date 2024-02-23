@@ -1,47 +1,4 @@
 <div class="w-11/12 mt-10 mx-auto flex flex-col">
+hello
+  </div>
 
-  <%= form_with(model: @rep_sets, id: 'rep_set_form', class: "w-full flex flex-col") do |form| %>
-    <% @workout.trainings.each do |training| %>
-      <%= current_user.exercises.find_by(id: training.exercise_id).name %>
-      <div class="flex flex-row">
-        <%= form.label :reps %>
-        <%= form.text_field :reps %>
-
-        <%= form.label :weight %>
-        <%= form.text_field :weight %>
-      </div>
-
-      <div class="field" id="extra-fields-container">
-        <!-- Extra fields will be added here dynamically -->
-      </div>
-
-      <button type="button" id="addFieldButton">Add More Fields</button>
-    <% end %>
-    <div class="actions">
-      <%= form.submit 'Save Workout Data' %>
-    </div>
-
-  <% end %>
-
-
-  <script>
-    document.addEventListener('DOMContentLoaded', function() {
-      const form = document.getElementById('myModelForm');
-      const container = document.getElementById('extra-fields-container');
-      const addButton = document.getElementById('addFieldButton');
-
-      let fieldIndex = 1;
-
-      addButton.addEventListener('click', function() {
-        const newField = document.createElement('div');
-        newField.innerHTML = `
-        <label for="my_model_extra_field_${fieldIndex}">Extra Field ${fieldIndex}</label>
-        <input type="text" name="my_model[extra_field_${fieldIndex}]" id="my_model_extra_field_${fieldIndex}">
-      `;
-        container.appendChild(newField);
-        fieldIndex++;
-      });
-    });
-  </script>
-
-</div>

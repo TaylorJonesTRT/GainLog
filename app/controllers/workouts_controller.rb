@@ -32,9 +32,15 @@ class WorkoutsController < ApplicationController
     end
   end
 
+  def new
+    @workout = current_user.workouts.build
+  end
+
   def create
-    workout_params[:exercises].each do |exercise|
-    end
+    puts 'hello'
+    puts params
+    # workout_params[:exercises].each do |exercise|
+    # end
     @workout = current_user.workouts.build(user_id: current_user.id)
 
     if @workout.save
@@ -44,13 +50,16 @@ class WorkoutsController < ApplicationController
           RepSet.create(workout_id: @workout.id, exercise_id: exercise, training_id: @training.id, reps: nil,
                         weight: nil)
         else
-          render json: :unprocessable_entity
+          render :new, status: :unprocessable_entity
         end
       end
+      redirect_to edit_workout_path(@workout)
     else
-      render json: :unprocessable_entity
+      render :new, status: :unprocessable_entity
     end
   end
+
+  def update; end
 
   private
 
