@@ -2,7 +2,7 @@
 <html data-theme="dracula">
   <head>
     <title>RubyGainLog</title>
-    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
     <%= stylesheet_link_tag "tailwind", "inter-font", "data-turbo-track": "reload" %>
@@ -23,15 +23,17 @@
 
   </head>
 
-  <body class="bg-base-neutral w-screen text-slate-200">
-    <main class="container w-full h-screen mx-auto">
+  <body class="bg-base-neutral w-full h-max text-slate-200">
+    <main class="container w-full h-max mx-auto">
+      <div>
       <%= yield %>
+      </div>
 
       <!-- These have been commented out, if need them manually add to your views -->
       <!-- <p class="notice"><%= notice %></p>
         <p class="alert"><%= alert %></p> -->
 
-        <div class="btm-nav border border-base-300">
+        <div class="btm-nav w-full border border-base-300">
           <a href="/" alt="home" class="bg-base-200">
             <button class="bg-base-200 text-pink-600">
               <span class="btm-nav-label">Home</span>
