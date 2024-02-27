@@ -1,14 +1,10 @@
 <div class="w-11/12 pt-10 mx-auto flex flex-col">
   <h1 class="text-3xl font-bold">Your Exercises</h1>
   <div class="exercise_start mt-7 flex flex-col">
-      <%= form_with model: @exercise, url: "/exercises", method: :post do |form| %>
+      <%= form_with model: @exercise, url: "/exercises", method: :post, class: "w-full" do |form| %>
         <div class="flex flex-row justify-between w-full">
-        <div class="basis-1/2">
           <%= form.text_field :name, placeholder: "Exercise Name", class: "input input-bordered input-primary w-full max-w-xs bg-transparent text-white" %>
-        </div>
-        <div class="basis-1/2">
           <%= form.submit "Create Exercise", class: "btn btn-primary ml-3" %>
-        </div>
         </div>
       <% end %>
 
