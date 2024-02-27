@@ -1,0 +1,34 @@
+<%= turbo_frame_tag "rep_set_list" do %>
+  <% workout_trainings.each do |training| %>
+    <div class="shrink">
+      <ul class="w-full flex flex-col shrink gap-4">
+        <li class="w-full flex flex-col shrink gap-4">
+          <h3 class="text-lg -mb-4"><%= current_user.exercises.find_by(id: training.exercise_id).name %></h3>
+          <% workout.rep_sets.where(training_id: training.id).each do |rep_set| %>
+            <%= form_with model: workout, class: "w-full mt-4" do |form| %>
+              <div class="w-full flex flex-row gap-2">
+                <%= form.text_field :reps, placeholder: "Reps", class: "shrink w-1/6 input input-bordered input-primary w-full max-w-xs bg-transparent text-white min-w-0" %>
+                <%= form.text_field :weight, placeholder: "Weight", class: "shrink min-w-0 input input-bordered input-primary w-full max-w-xs bg-transparent text-white " %>
+                <%= button_tag :submit, class: 'basis-1/6 btn btn-square btn-outline btn-secondary hover:btn-success', title: "Save Set" do %>
+                  <%= icon('fa-solid', 'check') %>
+                <% end %>
+                <%= button_to rep_set_path(rep_set), method: :delete, form: { data: { turbo_confirm: 'Are you sure?' } }, title: "Delete Exercise" do %>
+                  <div class="basis-1/6 btn btn-square btn-outline btn-secondary hover:btn-error">
+                    <%= icon('fa-solid', 'x')%>
+                  </div>
+                <% end %>
+              </div>
+            <% end %>
+          <% end %>
+        </li>
+        <%= button_to rep_sets_path, params: { rep_set: { :workout_id => @workout.id, :training_id => training.id, :exercise_id => training.exercise_id } }, method: :post, form: { data: { } }, title: "Add a new Set" do %>
+          <div class="w-full btn btn-sm btn-outline btn-secondary hover:btn-error">
+            Add Set
+          </div>
+        <% end %>
+      </ul>
+
+      <div class="divider divider-vertical divider-neutral mt-0 pt-0"></div>
+    </div>
+  <% end %>
+<% end %>

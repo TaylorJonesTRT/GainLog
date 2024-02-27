@@ -1,17 +1,17 @@
 Rails.application.routes.draw do
-  get 'rep_sets/new'
-  get 'rep_sets/create'
-  get 'rep_sets/edit'
-  get 'rep_sets/update'
   devise_for :users
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
+  # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
+  # Can be used by load balancers and uptime monitors to verify that the app is live.
+  get 'up' => 'rails/health#show', as: :rails_health_check
+
   # Defines the root path route ("/")
-  # root "articles#index"
-  root "workouts#index"
+  # root "posts#index"
+  root 'workouts#index'
 
-  resources :workouts
   resources :exercises
+  resources :workouts
   resources :trainings
-
+  resources :rep_sets
 end

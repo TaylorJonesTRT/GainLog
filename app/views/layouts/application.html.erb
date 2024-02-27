@@ -1,21 +1,15 @@
 <!DOCTYPE html>
-<html>
+<html data-theme="dracula">
   <head>
     <title>RubyGainLog</title>
-    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
     <%= stylesheet_link_tag "tailwind", "inter-font", "data-turbo-track": "reload" %>
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_include_tag "application", "data-turbo-track": "reload" %>
-    <%= vite_client_tag %>
-    <%= vite_stylesheet_tag 'application', data: { "turbo-track": "reload" } %>
-    <%= vite_javascript_tag 'application' %>
-
+    <%= stylesheet_link_tag "https://cdn.jsdelivr.net/npm/daisyui@4.7.2/dist/full.min.css" %>
     <script src="https://kit.fontawesome.com/f7174767c6.js" crossorigin="anonymous"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.1.0/flowbite.min.css" rel="stylesheet" />
-    <%= vite_client_tag %>
-    <%= vite_javascript_tag 'application' %>
     <!--
       If using a TypeScript entrypoint file:
       vite_typescript_tag 'application'
@@ -25,17 +19,37 @@
 
       Visit the guide for more information: https://vite-ruby.netlify.app/guide/rails
     -->
+    <%= javascript_importmap_tags %>
 
   </head>
 
-  <body class="bg-slate-900 w-screen text-slate-200">
-    <main class="container w-full mx-auto">
+  <body class="bg-base-neutral w-full h-max text-slate-200">
+    <main class="container w-full h-max mx-auto">
+      <div>
       <%= yield %>
+      </div>
 
       <!-- These have been commented out, if need them manually add to your views -->
       <!-- <p class="notice"><%= notice %></p>
         <p class="alert"><%= alert %></p> -->
+
+        <div class="btm-nav w-full border border-base-300">
+          <a href="/" alt="home" class="bg-base-200">
+            <button class="bg-base-200 text-pink-600">
+              <span class="btm-nav-label">Home</span>
+            </button>
+          </a>
+          <a href="/exercises" alt="home" class="bg-base-100">
+            <button class="bg-base-100 text-blue-600">
+              <span class="btm-nav-label">Exercises</span>
+            </button>
+          </a>
+            <%= link_to destroy_user_session_path, method: :delete, class: "bg-base-200" do %>
+              <button class="bg-base-200 text-teal-600">
+                <span class="btm-nav-label">Sign Out</span>
+              </button>
+            <% end %>
+        </div>
     </main>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.1.0/flowbite.min.js"></script>
   </body>
 </html>
