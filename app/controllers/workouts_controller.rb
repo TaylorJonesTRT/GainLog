@@ -37,10 +37,6 @@ class WorkoutsController < ApplicationController
   end
 
   def create
-    puts 'hello'
-    puts params
-    # workout_params[:exercises].each do |exercise|
-    # end
     @workout = current_user.workouts.build(user_id: current_user.id)
 
     if @workout.save
@@ -57,6 +53,11 @@ class WorkoutsController < ApplicationController
     else
       render :new, status: :unprocessable_entity
     end
+  end
+
+  def edit
+    @workout = Workout.find(params[:id])
+    @workout_trainings = @workout.trainings.order(id: :asc)
   end
 
   def update; end
