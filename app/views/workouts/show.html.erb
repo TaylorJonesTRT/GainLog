@@ -1,43 +1,5 @@
 <div class="w-11/12 mt-10 mx-auto flex flex-col">
-
-  <div class="flex flex-row justify-between">
-    <%= link_to "Edit this workout", edit_workout_path(@workout) %>
-  </div>
-
-
-  <div class="relative overflow-x-auto shadow-md sm:rounded-lg mb-5">
-    <% @workout.trainings.each do |training| %>
-      <table class="w-full text-sm text-left rtl:text-right text-slate-50 dark:text-gray-400">
-        <thead class="text-xs text-slate-50 bg-slate-800 uppercase dark:text-gray-400">
-          <tr>
-            <th scope="col" class="px-6 py-3">
-              <%= current_user.exercises.find_by(id: training.exercise_id).name %>
-            </th>
-            <th scope="col" class="px-6 py-3">
-              # of Reps
-            </th>
-            <th scope="col" class="px-6 py-3">
-              Weight
-            </th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr class="border-b border-slate-600 bg-slate-700">
-            <% @workout.rep_sets.each do |rep| %>
-              <th scope="row" class="px-6 py-4 font-medium text-slate-300 whitespace-nowrap dark:text-white">
-              </th>
-              <td class="px-6 py-4">
-                <%= rep.reps %>
-              </td>
-              <td class="px-6 py-4">
-                <%= rep.weight %>
-              </td>
-            <% end %>
-          </tr>
-        </tbody>
-      </table>
-    <% end %> 
-  </div>
-
+  <h2 class="text-3xl"><%= @workout.name %></h2>
+  <%= line_chart @workout.rep_sets.all %>
 </div>
 

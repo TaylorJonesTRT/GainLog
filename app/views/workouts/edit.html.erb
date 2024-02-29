@@ -1,5 +1,5 @@
 <div class="w-11/12 max-w-11/12 mt-10 mx-auto flex flex-col">
-  <h1 class="text-3xl font-bold">Edit Your Workout</h1>
+  <h1 class="text-3xl font-bold shrink">Edit Your <%= @workout.name %></h1>
 
   <div class="w-full max-w-full flex flex-col mt-5 mb-14">
     <%= render "workouts/rep_set_list", workout: @workout, workout_trainings: @workout_trainings %>
