@@ -75,3 +75,7 @@ gem 'ruby-lsp', '~> 0.14.1'
 gem 'ruby-lsp-rails', '~> 0.3.0'
 
 gem "font-awesome-sass", "~> 6.5"
+
+gem "chartkick", "~> 5.0"
+
+gem "groupdate", "~> 6.4"
