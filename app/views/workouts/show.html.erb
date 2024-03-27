@@ -1,43 +1,37 @@
 <div class="w-11/12 mt-10 mx-auto flex flex-col">
+  <h2 class="text-3xl text-primary"><%= @workout.name %></h2>
 
-  <div class="flex flex-row justify-between">
-    <%= link_to "Edit this workout", edit_workout_path(@workout) %>
+  <div class="mt-7">
+    <ul class="flex flex-col gap-y-4">
+      <% @trainings.each do |training| %>
+        <h4 class="text-lg font-bold text-secondary"><%= current_user.exercises.find(training.exercise_id).name %></h4>
+        <li class="grid grid-cols-4 gap-10">
+          <div>
+            Set #
+          </div>
+          <div>
+            Reps
+          </div>
+          <div>
+            Weight
+          </div>
+        </li>
+        <% i = 1 %>
+        <% @workout.rep_sets.where(training_id: training.id).order(:id).each do |set| %>
+          <li class="grid grid-cols-4 gap-10">
+            <div> <%= i %> </div>
+            <div>
+              <%= set.reps %>
+            </div>
+            <div>
+              <%= set.weight %>
+            </div>
+          </li>
+          <% i += 1 %>
+        <% end %>
+        <div class="divider divider-vertical divider-neutral mt-0 pt-0"></div>
+      <% end %>
+    </ul>
   </div>
-
-
-  <div class="relative overflow-x-auto shadow-md sm:rounded-lg mb-5">
-    <% @workout.trainings.each do |training| %>
-      <table class="w-full text-sm text-left rtl:text-right text-slate-50 dark:text-gray-400">
-        <thead class="text-xs text-slate-50 bg-slate-800 uppercase dark:text-gray-400">
-          <tr>
-            <th scope="col" class="px-6 py-3">
-              <%= current_user.exercises.find_by(id: training.exercise_id).name %>
-            </th>
-            <th scope="col" class="px-6 py-3">
-              # of Reps
-            </th>
-            <th scope="col" class="px-6 py-3">
-              Weight
-            </th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr class="border-b border-slate-600 bg-slate-700">
-            <% @workout.rep_sets.each do |rep| %>
-              <th scope="row" class="px-6 py-4 font-medium text-slate-300 whitespace-nowrap dark:text-white">
-              </th>
-              <td class="px-6 py-4">
-                <%= rep.reps %>
-              </td>
-              <td class="px-6 py-4">
-                <%= rep.weight %>
-              </td>
-            <% end %>
-          </tr>
-        </tbody>
-      </table>
-    <% end %> 
-  </div>
-
 </div>
 

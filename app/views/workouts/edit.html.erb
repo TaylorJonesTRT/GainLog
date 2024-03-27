@@ -1,5 +1,15 @@
 <div class="w-11/12 max-w-11/12 mt-10 mx-auto flex flex-col">
-  <h1 class="text-3xl font-bold">Edit Your Workout</h1>
+
+  <div class="flex flex-row justify-between items-center">
+    <h1 class="text-3xl font-bold shrink text-primary">Edit Your <%= @workout.name %></h1>
+
+    <%= link_to workout_path(@workout) do %>
+      <div class="btn btn-primary mt-3">
+        Back to workout page
+      </div>
+    <% end %>
+  </div>
+
 
   <div class="w-full max-w-full flex flex-col mt-5 mb-14">
     <%= render "workouts/rep_set_list", workout: @workout, workout_trainings: @workout_trainings %>
