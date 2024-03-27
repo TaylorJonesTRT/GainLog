@@ -2,6 +2,7 @@ import { Controller } from "@hotwired/stimulus"
 
 export default class extends Controller {
   connect() {
-    this.element.textContent = "Hello World!"
+    let test = "a test i guess";
+    console.log("hello world stim controller this is an update that hopefully requires no assets precompile");
   }
 }
