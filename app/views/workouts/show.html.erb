@@ -1,5 +1,37 @@
 <div class="w-11/12 mt-10 mx-auto flex flex-col">
-  <h2 class="text-3xl"><%= @workout.name %></h2>
-  <%= line_chart @workout.rep_sets.all %>
+  <h2 class="text-3xl text-primary"><%= @workout.name %></h2>
+
+  <div class="mt-7">
+    <ul class="flex flex-col gap-y-4">
+      <% @trainings.each do |training| %>
+        <h4 class="text-lg font-bold text-secondary"><%= current_user.exercises.find(training.exercise_id).name %></h4>
+        <li class="grid grid-cols-4 gap-10">
+          <div>
+            Set #
+          </div>
+          <div>
+            Reps
+          </div>
+          <div>
+            Weight
+          </div>
+        </li>
+        <% i = 1 %>
+        <% @workout.rep_sets.where(training_id: training.id).order(:id).each do |set| %>
+          <li class="grid grid-cols-4 gap-10">
+            <div> <%= i %> </div>
+            <div>
+              <%= set.reps %>
+            </div>
+            <div>
+              <%= set.weight %>
+            </div>
+          </li>
+          <% i += 1 %>
+        <% end %>
+        <div class="divider divider-vertical divider-neutral mt-0 pt-0"></div>
+      <% end %>
+    </ul>
+  </div>
 </div>
 

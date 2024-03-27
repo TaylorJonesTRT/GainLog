@@ -3,16 +3,18 @@
     <div class="shrink">
       <ul class="w-full flex flex-col shrink gap-4">
         <li class="w-full flex flex-col shrink gap-4">
-          <h3 class="text-lg -mb-4"><%= current_user.exercises.find_by(id: training.exercise_id).name %></h3>
-          <% workout.rep_sets.where(training_id: training.id).each do |rep_set| %>
-            <%= form_with model: workout, class: "w-full mt-4" do |form| %>
+          <h3 class="text-lg -mb-4 text-secondary"><%= current_user.exercises.find_by(id: training.exercise_id).name %></h3>
+          <% workout.rep_sets.where(training_id: training.id).order(:id).each do |rep_set| %>
+            <%= form_with model: rep_set, class: "w-full mt-4" do |form| %>
               <div class="w-full flex flex-row gap-2">
                 <%= form.text_field :reps, placeholder: "Reps", class: "shrink w-1/6 input input-bordered input-primary w-full max-w-xs bg-transparent text-white min-w-0" %>
                 <%= form.text_field :weight, placeholder: "Weight", class: "shrink min-w-0 input input-bordered input-primary w-full max-w-xs bg-transparent text-white " %>
-                <%= button_tag :submit, class: 'basis-1/6 btn btn-square btn-outline btn-secondary hover:btn-success', title: "Save Set" do %>
+                <%= hidden_field_tag 'workout_id', @workout.id %>
+                <%= hidden_field_tag 'training_id', training.id %>
+                <%= button_tag :submit, method: :put, class: 'basis-1/6 btn btn-square btn-outline btn-secondary hover:btn-success', title: "Save Set" do %>
                   <%= icon('fa-solid', 'check') %>
                 <% end %>
-                <%= button_to rep_set_path(rep_set), method: :delete, form: { data: { turbo_confirm: 'Are you sure?' } }, title: "Delete Exercise" do %>
+                <%= link_to rep_set_path(rep_set, rep_set: { workout_id: @workout.id, training_id: training.id} ), method: :delete, data: { turbo_method: :delete, turbo_confirm: 'Are you sure?' }, title: "Delete Exercise" do %>
                   <div class="basis-1/6 btn btn-square btn-outline btn-secondary hover:btn-error">
                     <%= icon('fa-solid', 'x')%>
                   </div>

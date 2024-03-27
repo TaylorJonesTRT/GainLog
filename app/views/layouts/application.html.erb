@@ -7,10 +7,9 @@
     <%= csp_meta_tag %>
     <%= stylesheet_link_tag "tailwind", "inter-font", "data-turbo-track": "reload" %>
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
-    <%= javascript_include_tag "application", "data-turbo-track": "reload" %>
+    <%= javascript_include_tag "application", "data-turbo-track": "reload", type: "module" %>
     <%= stylesheet_link_tag "https://cdn.jsdelivr.net/npm/daisyui@4.7.2/dist/full.min.css" %>
     <script src="https://kit.fontawesome.com/f7174767c6.js" crossorigin="anonymous"></script>
-    <%= javascript_include_tag "//www.google.com/jsapi", "chartkick" %>
     <!--
       If using a TypeScript entrypoint file:
       vite_typescript_tag 'application'
@@ -20,12 +19,14 @@
 
       Visit the guide for more information: https://vite-ruby.netlify.app/guide/rails
     -->
-    <%= javascript_importmap_tags %>
-
+    <%= turbo_include_tags %>
   </head>
 
   <body class="bg-base-neutral w-full h-max text-slate-200">
     <main class="container w-full h-max mx-auto">
+
+        <%= render partial: "application/flash_message", :locals => {flash:} %>
+
       <div>
         <%= yield %>
       </div>
