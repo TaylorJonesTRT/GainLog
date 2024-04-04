@@ -8,7 +8,6 @@
     <%= stylesheet_link_tag "tailwind", "inter-font", "data-turbo-track": "reload" %>
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_include_tag "application", "data-turbo-track": "reload", type: "module" %>
-    <%= stylesheet_link_tag "https://cdn.jsdelivr.net/npm/daisyui@4.7.2/dist/full.min.css" %>
     <script src="https://kit.fontawesome.com/f7174767c6.js" crossorigin="anonymous"></script>
     <!--
       If using a TypeScript entrypoint file:
@@ -22,12 +21,12 @@
     <%= turbo_include_tags %>
   </head>
 
-  <body class="bg-base-neutral w-full h-max text-slate-200">
-    <main class="container w-full h-max mx-auto">
+  <body class="bg-base-neutral w-full h-auto text-slate-200">
+    <main class="container w-full h-full mx-auto flex flex-col">
 
         <%= render partial: "application/flash_message", :locals => {flash:} %>
 
-      <div>
+      <div class="pb-20">
         <%= yield %>
       </div>
 
@@ -37,17 +36,22 @@
 
         <div class="btm-nav w-full border border-base-300">
           <a href="/" alt="home" class="bg-base-200">
-            <button class="bg-base-200 text-pink-600">
+            <button class="bg-base-200">
               <span class="btm-nav-label">Home</span>
             </button>
           </a>
-          <a href="/exercises" alt="home" class="bg-base-100">
-            <button class="bg-base-100 text-blue-600">
+          <a href="/workouts" alt="workouts" class="bg-base-100">
+            <button class="bg-base-100">
+              <span class="btm-nav-label">Workouts</span>
+            </button>
+          </a>
+          <a href="/exercises" alt="home" class="bg-base-200">
+            <button class="bg-base-200">
               <span class="btm-nav-label">Exercises</span>
             </button>
           </a>
-          <%= link_to destroy_user_session_path, method: :delete, class: "bg-base-200" do %>
-            <button class="bg-base-200 text-teal-600">
+          <%= link_to destroy_user_session_path, data: { turbo_method: "delete" }, class: "bg-base-100" do %>
+            <button class="bg-base-100">
               <span class="btm-nav-label">Sign Out</span>
             </button>
           <% end %>

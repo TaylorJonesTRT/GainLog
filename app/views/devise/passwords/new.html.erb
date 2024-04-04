@@ -1,16 +1,26 @@
-<h2>Forgot your password?</h2>
+<div class="uppercase mx-auto w-11/12 flex flex-col justify-end items-center text-center">
 
-<%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
-  <%= render "devise/shared/error_messages", resource: resource %>
-
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+  <div class="mx-auto w-max h-auto">
+    <%= image_tag "/assets/gainloglogo.svg" %>
   </div>
 
-  <div class="actions">
-    <%= f.submit "Send me reset password instructions" %>
-  </div>
-<% end %>
+  <h2 class="mx-auto mt-5 mb-10">Forgot your password?</h2>
 
-<%= render "devise/shared/links" %>
+  <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post, class: "w-full flex flex-col gap-4 justify-end items-center" }) do |f| %>
+    <%= render "devise/shared/error_messages", resource: resource %>
+
+    <div class="field w-auto">
+      <%= f.label :email %><br />
+      <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "text-black" %>
+    </div>
+
+    <div class="actions btn btn-primary w-1/2">
+      <%= f.submit "Send me reset password instructions" %>
+    </div>
+  <% end %>
+
+  <div class="mt-5">
+  <%= render "devise/shared/links" %>
+  </div>
+</div>
+

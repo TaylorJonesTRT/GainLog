@@ -1,7 +1,7 @@
 require 'pp'
 
 class RepSetsController < ApplicationController
-  include TurboConcerns
+  include RepSetConcerns
 
   before_action :authenticate_user!
 

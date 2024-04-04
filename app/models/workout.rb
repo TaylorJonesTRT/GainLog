@@ -4,6 +4,8 @@ class Workout < ApplicationRecord
   has_many :trainings
   has_many :rep_sets
 
+  alias_attribute :start_time, :created_at
+
   before_save do |workout|
     workout.name = "#{determine_workout_name} Workout"
   end
