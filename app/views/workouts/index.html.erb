@@ -1,11 +1,31 @@
-<div class="w-11/12 pt-10 mx-auto flex flex-col">
-  <h1 class="text-3xl font-bold text-primary">Start Workout</h1>
-  <div class="quickstart mt-7 flex flex-col">
-    <h3 class="text-lg">Quickstart</h3>
-      <%= link_to new_workout_path do %>
-        <div class="btn btn-primary mt-3 w-full">
-          Start an Empty Workout
+<div class="w-11/12 mt-10 mx-auto flex flex-col">
+  <div>
+    <h2 class="text-3xl font-bold shrink text-primary">Your Workouts</h1>
+  </div>
+
+  <div class="mt-7">
+    <%= week_calendar(events: @workouts) do |date, events| %>
+      <div class="flex flex-col justify-center items-center self-center">
+        <div class="shrink text-nowrap self-center mt-2">
+          <%= date %>
+        </div>
+        <div>
+          <% events.each do |event| %>
+            <div class="badge badge-primary badge-xs mt-2"></div>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
+
+    <div class="mt-14 w-full">
+    <h2 class="text-2xl font-bold text-secondary">Weeks Workouts</h2>
+      <% if @workouts.length < 1 %>
+        <p class="mt-4">No workouts for this week</span>
+      <% else %>
+        <div class="flex flex-col flex-wrap gap-3 mt-4">
+          <%= render "workouts/workout_list", workouts: @workouts %>
         </div>
       <% end %>
+    </div>
   </div>
 </div>

@@ -3,7 +3,10 @@ require 'pp'
 class WorkoutsController < ApplicationController
   before_action :authenticate_user!
 
-  def index; end
+  def index
+    start_date = params.fetch(:start_date, Time.zone.today).to_date
+    @workouts = Workout.where(start_time: start_date.all_week)
+  end
 
   def show
     @workout = current_user.workouts.find(params[:id])

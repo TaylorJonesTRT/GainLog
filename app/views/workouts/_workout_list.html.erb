@@ -1,0 +1,10 @@
+<% workouts.reverse_each do |workout| %>
+  <div class="card basis-1/3 bg-base-content shadow-xl flex-1 hover:bg-neutral-content">
+    <%= link_to workout_path(workout.id) do %>
+      <div class="card-body">
+        <h2 class="card-title text-primary-content"><%= workout.name %></h2>
+        <p class="text-secondary-content"><%= workout.created_at.strftime('%B %d, %Y') %></p>
+      </div>
+    <% end %>
+  </div>
+<% end %>

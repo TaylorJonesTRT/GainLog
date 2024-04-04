@@ -16,11 +16,10 @@
               <div class="flex flex-row justify-between">
                 <li class="flex flex-col justify-between">
                   <%= exercise.name %>
-                  <span class="text-xs">Personal Best: <%= exercise.personal_best %><span>
                 </li>
                 <%= check_box_tag 'workout[exercises][]', exercise.id, class: "toggle" %>
               </div>
-              <div class="divider divider-neutral -mt-4"></div>
+              <div class="divider divider-neutral"></div>
             <% end %>
           </ul>
 

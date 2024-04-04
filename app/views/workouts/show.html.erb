@@ -1,35 +1,44 @@
 <div class="w-11/12 mt-10 mx-auto flex flex-col">
-  <h2 class="text-3xl text-primary"><%= @workout.name %></h2>
+  <div class="flex flex-row justify-between items-center">
+    <h2 class="text-3xl font-bold shrink text-primary"><%= @workout.name %></h1>
+
+    <%= link_to edit_workout_path(@workout) do %>
+      <div class="btn btn-primary mt-3">
+        Edit this workout
+      </div>
+    <% end %>
+  </div>
 
   <div class="mt-7">
     <ul class="flex flex-col gap-y-4">
       <% @trainings.each do |training| %>
-        <h4 class="text-lg font-bold text-secondary"><%= current_user.exercises.find(training.exercise_id).name %></h4>
-        <li class="grid grid-cols-4 gap-10">
-          <div>
-            Set #
-          </div>
-          <div>
-            Reps
-          </div>
-          <div>
-            Weight
-          </div>
-        </li>
-        <% i = 1 %>
-        <% @workout.rep_sets.where(training_id: training.id).order(:id).each do |set| %>
-          <li class="grid grid-cols-4 gap-10">
-            <div> <%= i %> </div>
+        <div class="mt-4 mb-6">
+          <h4 class="text-lg font-bold text-secondary"><%= current_user.exercises.find(training.exercise_id).name %></h4>
+          <li class="grid grid-cols-3 gap-10 border-b border-secondary mt-2 pb-1">
             <div>
-              <%= set.reps %>
+              Set #
             </div>
             <div>
-              <%= set.weight %>
+              Reps
+            </div>
+            <div>
+              Weight
             </div>
           </li>
-          <% i += 1 %>
-        <% end %>
-        <div class="divider divider-vertical divider-neutral mt-0 pt-0"></div>
+          <% i = 1 %>
+          <% @workout.rep_sets.where(training_id: training.id).order(:id).each do |set| %>
+            <li class="grid grid-cols-3 gap-10 mt-2">
+              <div> <%= i %> </div>
+              <div>
+                <%= set.reps %>
+              </div>
+              <div>
+                <%= set.weight %>
+              </div>
+            </li>
+            <% i += 1 %>
+          <% end %>
+        </div>
       <% end %>
     </ul>
   </div>
