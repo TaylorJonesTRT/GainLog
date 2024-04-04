@@ -58,6 +58,8 @@ group :development do
 
   # Speed up commands on slow machines / big apps [https://github.com/rails/spring]
   # gem "spring"
+
+  gem 'tapioca', require: false
 end
 
 group :test do
@@ -74,12 +76,14 @@ gem 'ruby-lsp', '~> 0.14.1'
 
 gem 'ruby-lsp-rails', '~> 0.3.0'
 
-gem "font-awesome-sass", "~> 6.5"
+gem 'font-awesome-sass', '~> 6.5'
 
-gem "chartkick", "~> 5.0"
+gem 'chartkick', '~> 5.0'
 
-gem "groupdate", "~> 6.4"
+gem 'groupdate', '~> 6.4'
 
-gem "erb_lint", "~> 0.5.0"
+gem 'erb_lint', '~> 0.5.0'
 
-gem "jsbundling-rails", "~> 1.3"
+gem 'jsbundling-rails', '~> 1.3'
+
+gem 'simple_calendar', '~> 3.0'
