@@ -1,58 +1,29 @@
-<h2>Change your password</h2>
-
-<%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put }) do |f| %>
-  <%= render "devise/shared/error_messages", resource: resource %>
-  <%= f.hidden_field :reset_password_token %>
-
-  <div class="field">
-    <%= f.label :password, "New password" %><br />
-    <% if @minimum_password_length %>
-      <em>(<%= @minimum_password_length %> characters minimum)</em><br />
-    <% end %>
-    <%= f.password_field :password, autofocus: true, autocomplete: "new-password" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :password_confirmation, "Confirm new password" %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
-  </div>
-
-  <div class="actions">
-    <%= f.submit "Change my password" %>
-  </div>
-<% end %>
-
-<%= render "devise/shared/links" %>
-
-
 <div class="uppercase mx-auto w-11/12 flex flex-col justify-end items-center">
 
   <div class="mx-auto w-max h-auto">
     <%= image_tag "/assets/gainloglogo.svg" %>
   </div>
 
-  <h2 class="mx-auto mt-5 mb-10">Log in</h2>
+  <h2 class="mx-auto mt-5 mb-10">Change your password</h2>
+  <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { class: "flex flex-col", method: :put }) do |f| %>
+    <%= render "devise/shared/error_messages", resource: resource %>
+    <%= f.hidden_field :reset_password_token %>
 
-  <%= form_for(resource, as: resource_name, url: session_path(resource_name), html: { class: "flex flex-col"}) do |f| %>
     <div class="field">
-      <%= f.label :email %><br />
-      <div class="text-black"><%= f.email_field :email, autofocus: true, autocomplete: "email" %></div>
+      <%= f.label :password, "New password" %><br />
+      <% if @minimum_password_length %>
+        <em>(<%= @minimum_password_length %> characters minimum)</em><br />
+      <% end %>
+      <%= f.password_field :password, autofocus: true, autocomplete: "new-password" %>
     </div>
 
-    <div class="field mt-5">
-      <%= f.label :password %><br />
-      <%= f.password_field :password, autocomplete: "current-password", class: "text-black" %>
+    <div class="field mt-4">
+      <%= f.label :password_confirmation, "Confirm new password" %><br />
+      <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
     </div>
 
-    <% if devise_mapping.rememberable? %>
-      <div class="field mt-1">
-        <%= f.check_box :remember_me %>
-        <%= f.label :remember_me %>
-      </div>
-    <% end %>
-
-    <div class="actions self-center mt-3 mb-3 inline-block rounded border border-sky-800 px-12 py-3 text-sm font-medium text-sky-800 hover:bg-sky-800 hover:text-slate-200 focus:outline-none focus:ring active:bg-indigo-500 hover:shadow-lg">
-      <%= f.submit "Log in" %>
+    <div class="actions btn btn-primary mt-4 mb-4">
+      <%= f.submit "Change my password" %>
     </div>
   <% end %>
 
