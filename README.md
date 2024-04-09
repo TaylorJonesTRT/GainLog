@@ -1,24 +1,20 @@
-# README
+# GainLog
+This is a personal fitness log / workout log. After growing tired of apps having paywalls for either how many workouts a user is allowed to create or how many different exercises they are allowed to use in their "unlimited" amount of workouts, I decided to make my own.
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+#### Current Features
+* Add your own exercises
+* Create workouts using any and all exercises that you added
+* Edit the sets for your workouts to show the amount of reps and how much weight you pushed/pulled
 
-Things you may want to cover:
+## Requirements
+* Ruby on Rails
+* Postgres16
 
-* Ruby version
+## Local Installation
 
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+* Clone this repo
+* Create a .env file using the .env.sample file provided
+* run `bin/bundle install`
+* run `rails db:migrate`
+* run `rails assets:precompile`
+* run `rails s` (or deploy locally however you see fit)
