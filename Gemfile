@@ -87,3 +87,5 @@ gem 'erb_lint', '~> 0.5.0'
 gem 'jsbundling-rails', '~> 1.3'
 
 gem 'simple_calendar', '~> 3.0'
+
+gem "dockerfile-rails", ">= 1.6", :group => :development
