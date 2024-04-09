@@ -1,8 +1,6 @@
 require 'pp'
 
 class RepSetsController < ApplicationController
-  include RepSetConcerns
-
   before_action :authenticate_user!
 
   def create
