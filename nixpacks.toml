@@ -1,0 +1,28 @@
+[variables]
+RAILS_ENV="production"
+# disable documentation compilation in ruby for faster build and smaller footprint (also mentionned in #727)
+# build ruby with jemalloc for lower memory footprint (optional)
+RUBY_CONFIGURE_OPTS="--with-jemalloc --disable-install-rdoc"
+
+# Result for my project:
+# - 15-20 sec to install apt packages
+# - 100 sec to install ruby 2.6.9 (no doc, including 20 sec to install openssl 1.1.1)
+# - 26 sec to install gems
+# - 5 sec for assets:precompile
+# Total: ~150, but 40sec with ruby and APT cached
+
+[phases.setup]
+# to compile ruby with jemalloc (optional)
+aptPkgs = ["...", "libjemalloc-dev"]
+# Below is an attempt to cache ruby
+# Had to rewrite all commands here to change `rbenv install -s` and `gem install bundler:2.3.21 --no-document --conservative`
+# and add the `cp` commands to copy the cached .rbenv folder back and forth to circumvent the caching volatility.
+# I couldn't find a way to interpolate Ruby version and bundler version in here.
+cmds = ["cp -r /cache/.rbenv /root", "curl -fsSL https://github.com/rbenv/rbenv-installer/raw/HEAD/bin/rbenv-installer | bash -s stable && printf '\\neval \"$(rbenv init -)\"' >> /root/.profile && . /root/.profile && rbenv install -s 2.6.9 && rbenv global 2.6.9 && gem install bundler:2.3.21 --no-document --conservative", "cp -r /root/.rbenv /cache"]
+cacheDirectories = ["/cache/.rbenv"]
+
+# I tried this to cache gems too but they seem to be installed between the two steps actually
+# so they don't benefit from the caching on either side it seems, or I'm not sure why.
+# [phases.build]
+# cacheDirectories = ["/cache/.rbenv"]
+# cmds = ["cp -r /cache/.rbenv /root", "...", "cp -r /root/.rbenv /cache"]
