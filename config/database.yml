@@ -81,5 +81,4 @@ test:
 production:
   <<: *default
   database: gainlog
-  username: postgres
-  password: <%= ENV["RUBY_GAIN_LOG_DATABASE_PASSWORD"] %>
+  url: <%= ENV["DATABASE_URL"] %>
