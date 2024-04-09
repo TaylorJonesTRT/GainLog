@@ -1,5 +1,3 @@
-require 'pp'
-
 class RepSetsController < ApplicationController
   before_action :authenticate_user!
 
