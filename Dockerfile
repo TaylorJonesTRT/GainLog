@@ -20,6 +20,8 @@ RUN bash -c "set -o pipefail && apt-get update \
 
 USER ruby
 
+RUN gem install bundler
+
 COPY --chown=ruby:ruby Gemfile* ./
 RUN bundle install
 
