@@ -32,6 +32,8 @@ Rails.application.configure do
   config.serve_statice_assets = true
   config.assets.digest = false
 
+  config.assets.css_compressor = nil
+
   # Enable serving of images, stylesheets, and JavaScripts from an asset server.
   # config.asset_host = "http://assets.example.com"
 
