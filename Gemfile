@@ -86,3 +86,13 @@ gem "simple_calendar", "~> 3.0"
 gem "pg", "~> 1.5"
 
 gem "dockerfile-rails", ">= 1.6", :group => :development
+
+gem "rubocop-performance", "~> 1.21"
+
+gem "rubocop-rails", "~> 2.25"
+
+gem "rubocop-rspec", "~> 2.29"
+
+gem "local_time", "~> 3.0"
+
+gem "chartkick", "~> 5.0"

@@ -1,0 +1,38 @@
+<div class="mt-7">
+  <h2 class="text-xl font-bold text-primary">Weight Pushed</h2>
+  <div class="mt-2">
+    <%= column_chart [['Previous Workout', @previous_template_workout.rep_sets.sum(:reps) * @previous_template_workout.rep_sets.sum(:weight)],['This Workout', @workout.rep_sets.sum(:reps) * @workout.rep_sets.sum(:weight)]], ytitle: 'Pounds' %>
+  </div>
+
+  <ul class="mt-4 flex flex-col gap-y-4">
+    <% @trainings.each do |training| %>
+      <div class="mt-4 mb-6">
+        <h4 class="text-lg font-bold text-secondary"><%= current_user.exercises.find(training.exercise_id).name %></h4>
+        <li class="grid grid-cols-3 gap-10 border-b border-secondary mt-2 pb-1">
+          <div>
+            Set #
+          </div>
+          <div>
+            Reps
+          </div>
+          <div>
+            Weight
+          </div>
+        </li>
+        <% i = 1 %>
+        <% @workout.rep_sets.where(training_id: training.id).order(:id).each do |set| %>
+          <li class="grid grid-cols-3 gap-10 mt-2">
+            <div> <%= i %> </div>
+            <div>
+              <%= set.reps %>
+            </div>
+            <div>
+              <%= set.weight %>
+            </div>
+          </li>
+          <% i += 1 %>
+        <% end %>
+      </div>
+    <% end %>
+  </ul>
+</div>

@@ -1,10 +1,13 @@
 <div class="w-11/12 mt-10 mx-auto flex flex-col">
-  <div>
-    <h2 class="text-3xl font-bold shrink text-primary">Your Workouts</h1>
+  <div class="flex flex-row justify-between items-center">
+    <h2 class="text-3xl font-bold shrink text-primary">Your Workouts</h2>
+    <a href=<%= new_workout_path %>>
+         <button type="button" class="btn btn-primary ml-3">New Workout</button>
+    </a>
   </div>
 
   <div class="mt-7">
-    <%= week_calendar(events: @workouts) do |date, events| %>
+    <%= calendar(number_of_days: 3, events: @workouts) do |date, events| %>
       <div class="flex flex-col justify-center items-center self-center">
         <div class="shrink text-nowrap self-center mt-2">
           <%= date %>
@@ -20,7 +23,7 @@
     <div class="mt-14 w-full">
     <h2 class="text-2xl font-bold text-secondary">Weeks Workouts</h2>
       <% if @workouts.length < 1 %>
-        <p class="mt-4">No workouts for this week</span>
+        <p class="mt-4">No workouts for this week</p>
       <% else %>
         <div class="flex flex-col flex-wrap gap-3 mt-4">
           <%= render "workouts/workout_list", workouts: @workouts %>

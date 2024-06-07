@@ -13,7 +13,7 @@ default: &default
 development:
   <<: *default
   database: gainlog_prod
-  url: <%= ENV["DATABASE_URL"] %>
+  url: postgres://postgres.frygjodjkgbnpscoguho:Ok8Zs2TDaelbyY2r@aws-0-us-west-1.pooler.supabase.com:5432/postgres
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".

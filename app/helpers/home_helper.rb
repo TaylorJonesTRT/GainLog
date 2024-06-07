@@ -1,16 +1,17 @@
 module HomeHelper
-  def format_exercise_names(workout)
-    exercise_names = []
-    trainings = Workout.find(workout.id).trainings
+    def format_exercise_names(workout, template)
+        exercise_ids = []
+        if template.present?
+            template.exercise_ids.each { |id| exercise_ids << id }
+        else
+            trainings = Workout.find(workout.id).trainings
+            trainings.each { |training| exercise_ids << training.exercise_id }
+        end
 
-    trainings.each do |training|
-      exercise_names << Exercise.find_by(id: training.exercise_id).name
+        exercise_names = exercise_ids.map do |id|
+            Exercise.find(id).name
+        end
+
+        exercise_names.join(', ')
     end
-
-    # exercise_names = []
-    # exercises.each do |exercise|
-    #   exercise_names << exercise.name
-    # end
-    exercise_names.join(', ')
-  end
 end

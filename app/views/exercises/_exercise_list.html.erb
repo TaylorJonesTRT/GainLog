@@ -4,7 +4,7 @@
       <div class="flex flex-row justify-between">
         <li class="flex flex-col justify-between">
           <%= exercise.name %>
-          <span class="text-xs">Personal Best: <%= exercise.personal_best %><span>
+          <span class="text-xs">Personal Best: <%= exercise.personal_best %></span>
         </li>
         <%= button_to exercise_url(exercise), method: :delete, form: { data: { turbo_confirm: 'Are you sure?' } }, form_class: "btn btn-square btn-outline btn-secondary hover:btn-error", title: "Delete Exercise" do %>
             <%= icon('fa-solid', 'x')%>

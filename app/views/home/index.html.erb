@@ -1,6 +1,5 @@
 <div class="w-11/12 h-auto pt-10 mx-auto flex flex-col">
 
-  <div>
     <h1 class="text-3xl font-bold text-primary">Your GainLog</h1>
     <div class="quickstart mt-7 flex flex-col">
       <h3 class="text-lg">Quickstart</h3>
@@ -9,8 +8,22 @@
           Start an Empty Workout
         </div>
       <% end %>
+        <div class="w-full border-opacity-50">
+          <div class="divider">OR USE A TEMPLATE</div>
+        </div>
+        <div class="w-full flex flex-col flex-wrap mt-2 gap-2">
+          <% @templates.each do |template| %>
+            <div class="card card-compact bg-base-content shadow-xl hover:bg-neutral-content max-h-12">
+              <%= button_to workouts_path(template_id: template.id), method: "post", data: { turbo: false } do %>
+                <div class="card-body flex flex-col !p-0 !px-5 !py-1">
+                  <span class="flex-1 card-title text-primary-content truncate text-sm"><%= template.name %></span>
+                  <span class="text-secondary-content text-xs truncate w-full -mt-2 pb-2"><%= format_exercise_names(nil, template) %></span>
+                </div>
+              <% end %>
+            </div>
+          <% end %>
+        </div>
     </div>
-  </div>
 
   <div class="mt-14 w-full">
     <h2 class="text-2xl font-bold text-secondary">Recent Workouts</h2>

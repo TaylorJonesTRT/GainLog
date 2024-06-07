@@ -4,7 +4,7 @@
       <div class="card-body w-full">
         <h2 class="card-title text-primary-content"><%= workout.name %></h2>
         <p class="text-secondary-content text-xs -mt-2"><%= workout.created_at.strftime('%B %d, %Y') %></p>
-        <p class="text-secondary-content text-xs truncate w-4/12 -mt-2"><%= format_exercise_names(workout) %><p>
+        <p class="text-secondary-content text-xs truncate w-4/12 -mt-2"><%= format_exercise_names(workout, nil) %><p>
       </div>
     <% end %>
   </div>

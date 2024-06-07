@@ -1,0 +1,26 @@
+<div class="mt-5">
+  <% if current_user.exercises.empty? %>
+    <p>It looks like you don't have any exercises created, click <%= link_to "here", exercises_path, class: "text-red-300 hover:underline" %> to create some!</p>
+  <% else %>
+    <%= form_with model: template do |form| %>
+
+      <%= form.text_field :name, placeholder: 'Template Name', class: "input input-bordered input-primary w-full max-w-xs bg-transparent text-white" %>
+
+      <h3 class="text-xl mt-10">Select this Templates exercise's</h3>
+      <ul class="flex flex-col mt-4">
+        <% current_user.exercises.each do |exercise| %>
+          <div class="flex flex-row justify-between">
+            <li class="flex flex-col justify-between">
+              <%= exercise.name %>
+            </li>
+            <%= check_box_tag 'template[exercise_ids][]', exercise.id, template.exercise_ids.include?(exercise.id), class: "toggle" %>
+          </div>
+          <div class="divider divider-neutral"></div>
+        <% end %>
+      </ul>
+
+      <%= form.submit class: 'btn btn-primary' %>
+
+    <% end %>
+  <% end %>
+</div>

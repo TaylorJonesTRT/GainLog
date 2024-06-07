@@ -33,6 +33,7 @@
       <!-- <p class="notice"><%= notice %></p>
         <p class="alert"><%= alert %></p> -->
 
+      <% unless controller_name == 'sessions' || controller_name == 'registrations' || controller_name == 'passwords' %>
         <div class="btm-nav w-full border border-base-300">
           <a href="/" alt="home" class="bg-base-200">
             <button class="bg-base-200">
@@ -44,17 +45,23 @@
               <span class="btm-nav-label">Workouts</span>
             </button>
           </a>
-          <a href="/exercises" alt="home" class="bg-base-200">
+          <a href="/templates" alt="templates" class="bg-base-200">
+            <button class="bg-base-100">
+              <span class="btm-nav-label">Templates</span>
+            </button>
+          </a>
+          <a href="/exercises" alt="home" class="bg-base-100">
             <button class="bg-base-200">
               <span class="btm-nav-label">Exercises</span>
             </button>
           </a>
-          <%= link_to destroy_user_session_path, data: { turbo_method: "delete" }, class: "bg-base-100" do %>
+          <%= link_to destroy_user_session_path, data: { turbo_method: "delete" }, class: "bg-base-200" do %>
             <button class="bg-base-100">
               <span class="btm-nav-label">Sign Out</span>
             </button>
           <% end %>
         </div>
+        <% end %>
     </main>
   </body>
 </html>

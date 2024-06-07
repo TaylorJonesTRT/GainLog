@@ -1,5 +1,6 @@
 class RepSetsController < ApplicationController
   before_action :authenticate_user!
+  before_action :set_repset, only: [:update, :destroy]
 
   def create
     workout_id = repset_params[:workout_id]
@@ -16,8 +17,6 @@ class RepSetsController < ApplicationController
   end
 
   def update
-    @rep_set = RepSet.find(params[:id])
-
     workout_id = params[:workout_id]
 
     if @rep_set.update(repset_params)
@@ -28,7 +27,6 @@ class RepSetsController < ApplicationController
   end
 
   def destroy
-    @rep_set = RepSet.find(params[:id])
     @rep_set.destroy
 
     workout_id = repset_params[:workout_id]
@@ -40,5 +38,9 @@ class RepSetsController < ApplicationController
 
   def repset_params
     params.require(:rep_set).permit(:reps, :weight, :training_id, :workout_id, :exercise_id)
+  end
+
+  def set_repset
+    @rep_set = RepSet.find(params[:id])
   end
 end

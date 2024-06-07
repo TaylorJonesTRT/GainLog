@@ -1,0 +1,16 @@
+<div class="w-11/12 mt-10 mx-auto flex flex-col">
+  <div class="flex flex-row justify-between items-center">
+    <h2 class="text-3xl font-bold shrink text-primary">Your Templates</h2>
+    <a href=<%= new_template_path %>>
+      <button type="button" class="btn btn-primary ml-3">New Template</button>
+    </a>
+  </div>
+
+    <div class="mt-14 w-full">
+      <% if @templates.length < 1 %>
+        <p class="mt-4">You have no Templates created.</p>
+      <% else %>
+        <%= render "templates/template_list", templates: @templates %>
+      <% end %>
+    </div>
+</div>

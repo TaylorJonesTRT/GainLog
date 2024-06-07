@@ -10,9 +10,27 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_02_29_170400) do
+ActiveRecord::Schema[7.1].define(version: 2024_05_30_012445) do
+  create_schema "auth"
+  create_schema "extensions"
+  create_schema "graphql"
+  create_schema "graphql_public"
+  create_schema "pgbouncer"
+  create_schema "pgsodium"
+  create_schema "pgsodium_masks"
+  create_schema "realtime"
+  create_schema "storage"
+  create_schema "vault"
+
   # These are extensions that must be enabled in order to support this database
+  enable_extension "pg_graphql"
+  enable_extension "pg_stat_statements"
+  enable_extension "pgcrypto"
+  enable_extension "pgjwt"
+  enable_extension "pgsodium"
   enable_extension "plpgsql"
+  enable_extension "supabase_vault"
+  enable_extension "uuid-ossp"
 
   create_table "exercises", force: :cascade do |t|
     t.bigint "user_id", null: false
@@ -34,6 +52,15 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_29_170400) do
     t.index ["exercise_id"], name: "index_rep_sets_on_exercise_id"
     t.index ["training_id"], name: "index_rep_sets_on_training_id"
     t.index ["workout_id"], name: "index_rep_sets_on_workout_id"
+  end
+
+  create_table "templates", force: :cascade do |t|
+    t.string "name"
+    t.integer "exercise_ids", default: [], array: true
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "user_id", null: false
+    t.index ["user_id"], name: "index_templates_on_user_id"
   end
 
   create_table "trainings", force: :cascade do |t|
@@ -62,6 +89,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_29_170400) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "name"
+    t.integer "template_id"
     t.index ["user_id"], name: "index_workouts_on_user_id"
   end
 
@@ -69,6 +97,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_29_170400) do
   add_foreign_key "rep_sets", "exercises"
   add_foreign_key "rep_sets", "trainings"
   add_foreign_key "rep_sets", "workouts"
+  add_foreign_key "templates", "users"
   add_foreign_key "trainings", "exercises"
   add_foreign_key "trainings", "workouts"
   add_foreign_key "workouts", "users"

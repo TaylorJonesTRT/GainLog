@@ -19,6 +19,9 @@ AllCops:
     - db/schema.rb
   NewCops: enable
 
+Layout/IndentationWidth:
+  Width: 4
+
 Layout/LineLength:
   Max: 120
 

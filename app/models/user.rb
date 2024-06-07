@@ -7,4 +7,5 @@ class User < ApplicationRecord
   has_many :exercises
   has_many :workouts
   has_many :rep_sets
+  has_many :templates
 end
