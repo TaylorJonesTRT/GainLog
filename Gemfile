@@ -37,6 +37,10 @@ gem "thruster", require: false
 
 gem "sorbet-runtime", "~> 0.5"
 
+gem "devise"
+gem "devise-jwt"
+gem "rack-cors"
+
 group :development, :test do
     gem "ruby-lsp", require: false
     gem "ruby-lsp-rails", require: false
