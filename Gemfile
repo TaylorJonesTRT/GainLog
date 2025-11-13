@@ -35,7 +35,7 @@ gem "thruster", require: false
 # Use Rack CORS for handling Cross-Origin Resource Sharing (CORS), making cross-origin Ajax possible
 # gem "rack-cors"
 
-gem "sorbet-runtime", "~> 0.5"
+gem "sorbet-runtime", "~> 0.6"
 
 gem "devise"
 gem "devise-jwt"
