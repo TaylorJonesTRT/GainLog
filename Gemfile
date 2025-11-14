@@ -53,6 +53,6 @@ group :development, :test do
   # Omakase Ruby styling [https://github.com/rails/rubocop-rails-omakase/]
   gem "rubocop-rails-omakase", require: false
 
-  gem "sorbet", "~> 0.5"
+  gem "sorbet", "~> 0.6"
   gem "tapioca", "~> 0.17", require: false
 end
