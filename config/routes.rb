@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :exercises
   devise_for :users,
     path: "",
     path_names: {
@@ -19,4 +20,6 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   # root "posts#index"
+
+  resources :exercises
 end
