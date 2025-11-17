@@ -2,6 +2,8 @@ require_relative "boot"
 
 require "rails/all"
 
+require_relative "../app/middleware/jwt_expiration_check"
+
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
@@ -32,5 +34,6 @@ module RubyGainLog
     config.session_store :cookie_store, key: "_interslice_session"
     config.middleware.use ActionDispatch::Cookies
     config.middleware.use config.session_store, config.session_options
+    config.middleware.use JwtExpirationCheck
   end
 end
