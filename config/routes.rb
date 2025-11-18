@@ -22,4 +22,6 @@ Rails.application.routes.draw do
   # root "posts#index"
 
   resources :exercises
+
+  get "auth/verify", to: "auth#verify"
 end
