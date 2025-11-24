@@ -3,13 +3,23 @@ class WorkoutsController < ApplicationController
   before_action :set_workout, only: %i[ show update destroy ]
 
   def index
-    @wourkouts = Workout.where(user_id: current_user)
+    @wourkouts = current_user.workouts.all
 
     render json: @workouts
   end
 
   def show
-    render json: @workout
+    @workout = current_user.workouts.find(params[:id])
+
+  render json: @workout.as_json(only: [ :id, :user_id, :title, :created_at, :updated_at ]).merge(
+      workout_sets: @workout.ordered_workout_sets.as_json(
+        include: {
+          exercise: {
+            only: [ :id, :name ]
+          }
+        }
+      )
+    )
   end
 
   def create
@@ -23,7 +33,7 @@ class WorkoutsController < ApplicationController
   end
 
   def update
-    if @workout.update(exercise_params)
+    if @workout.update(workout_params)
       render json: @workout
     else
       render json: @workout.errors, status: :unprocessable_content
@@ -41,6 +51,6 @@ class WorkoutsController < ApplicationController
   end
 
   def workout_params
-    params.require(:workout).permit(:name)
+    params.require(:workout).permit(:title, :completed_at, exercise_ids: [])
   end
 end

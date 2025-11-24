@@ -1,4 +1,4 @@
-class Api::AuthController < ApplicationController
+class AuthController < ApplicationController
   before_action :authenticate_user!
 
   def verify

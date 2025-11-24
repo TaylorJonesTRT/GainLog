@@ -1,7 +1,7 @@
 class JwtDenylist < ApplicationRecord
   include Devise::JWT::RevocationStrategies::Denylist
 
-  self.table_name = "jwt_denylist"
+  self.table_name = "jwt_denylists"
 
   # def self.jwt_revoked?(payload, user)
   #   super || token_expired?(payload)

@@ -13,7 +13,8 @@ class WorkoutSetsController < ApplicationController
   end
 
   def create
-    @workout_set = current_user.workout_sets.build(workout_set_params)
+    @workout_set =  WorkoutSet.new(workout_set_params)
+    @workout = current_user.workouts.find(@workout_set.workout_id)
 
     if @workout_set.save
       render json: @workout_set, status: :created, location: @workout_set
@@ -23,7 +24,7 @@ class WorkoutSetsController < ApplicationController
   end
 
   def update
-    if @workout_set.update(exercise_params)
+    if @workout_set.update(workout_set_params)
       render json: @workout_set
     else
       render json: @workout_set.errors, status: :unprocessable_content
@@ -36,11 +37,11 @@ class WorkoutSetsController < ApplicationController
 
   private
 
-  def set_workout
+  def set_workout_set
     @workout_set = WorkoutSet.find(params.expect(:id))
   end
 
   def workout_set_params
-    params.require(:workout_set).permit(:workout_id, :name, :exercise_id, :reps, :weight, :set_order, :notes, :rest_time)
+    params.require(:workout_set).permit(:workout_id, :exercise_id, :reps, :weight, :set_order, :notes, :rest_time)
   end
 end
