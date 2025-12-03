@@ -5,7 +5,7 @@ class ExercisesController < ApplicationController
   rescue_from JWT::DecodeError, with: :handle_invalid_token
 
   def index
-    @exercises = Exercise.where(user_id: current_user)
+    @exercises = Exercise.all.order(:category, :name)
 
     render json: @exercises
   end

@@ -10,16 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_11_23_200954) do
+ActiveRecord::Schema[8.0].define(version: 2025_11_29_061630) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
   create_table "exercises", force: :cascade do |t|
-    t.bigint "user_id", null: false
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["user_id"], name: "index_exercises_on_user_id"
+    t.string "category"
+    t.string "equipment"
+    t.string "difficulty"
   end
 
   create_table "jwt_denylists", force: :cascade do |t|
@@ -64,7 +65,6 @@ ActiveRecord::Schema[8.0].define(version: 2025_11_23_200954) do
     t.index ["user_id"], name: "index_workouts_on_user_id"
   end
 
-  add_foreign_key "exercises", "users"
   add_foreign_key "workout_sets", "workouts"
   add_foreign_key "workouts", "users"
 end
