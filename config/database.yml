@@ -85,8 +85,8 @@ test:
 production:
   primary: &primary_production
     <<: *default
-    host:
-    port:
+    host: <%= Rails.application.credentials.dig(:database, :host) %>
+    port: <%= Rails.application.credentials.dig(:database, :port) %>
     database: gain_log_production
     username: <%= Rails.application.credentials.dig(:database, :username) %>
     password: <%= Rails.application.credentials.dig(:database, :password) %>
