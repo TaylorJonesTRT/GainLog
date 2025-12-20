@@ -2,12 +2,49 @@
 <html>
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
-      /* Email styles need to be inline */
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        line-height: 1.6;
+        color: #333;
+        max-width: 600px;
+        margin: 0 auto;
+        padding: 20px;
+      }
+      a {
+        color: #4F46E5;
+        text-decoration: none;
+      }
+      a:hover {
+        text-decoration: underline;
+      }
+      .button {
+        display: inline-block;
+        background-color: #4F46E5;
+        color: #ffffff !important;
+        padding: 12px 24px;
+        border-radius: 6px;
+        text-decoration: none;
+        margin: 16px 0;
+      }
+      .footer {
+        margin-top: 32px;
+        padding-top: 16px;
+        border-top: 1px solid #eee;
+        font-size: 14px;
+        color: #666;
+      }
     </style>
   </head>
 
   <body>
+    <div style="text-align: center; margin-bottom: 24px;">
+      <h1 style="color: #4F46E5; margin: 0;">GainLog</h1>
+    </div>
     <%= yield %>
+    <div class="footer">
+      <p>This email was sent by GainLog. If you have questions, please contact support.</p>
+    </div>
   </body>
 </html>

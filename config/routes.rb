@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   resources :exercises
   devise_for :users,
+    defaults: { format: :json },
     path: "",
     path_names: {
       sign_in: "login",
@@ -9,7 +10,8 @@ Rails.application.routes.draw do
     },
     controllers: {
       sessions: "users/sessions",
-      registrations: "users/registrations"
+      registrations: "users/registrations",
+      passwords: "users/passwords"
     }
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
