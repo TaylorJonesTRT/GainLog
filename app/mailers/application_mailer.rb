@@ -1,4 +1,4 @@
 class ApplicationMailer < ActionMailer::Base
-  default from: "no-reply@taylorwjones.com"
+  default from: "account-services@gainlog.taylorwjones.com"
   layout "mailer"
 end
