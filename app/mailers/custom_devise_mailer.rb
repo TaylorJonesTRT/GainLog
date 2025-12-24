@@ -6,7 +6,7 @@ class CustomDeviseMailer < Devise::Mailer
   helper do
     def frontend_reset_password_url(token)
       host = Rails.env.production? ? "https://gainlog.taylorwjones.com" : "http://localhost:5173"
-      "#{host}/reset-password?reset_password_token=#{token}"
+      "#{host}/auth/password-reset?reset_password_token=#{token}"
     end
   end
 end
